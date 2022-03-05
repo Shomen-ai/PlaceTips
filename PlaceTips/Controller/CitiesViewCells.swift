@@ -2,8 +2,6 @@ import UIKit
 
 final class CitiesViewCells: UITableViewCell {
     
-    static let reuseIdentifier = "CellId"
-    
     private lazy var cityLabel: UILabel = {
         let nickname = UILabel()
         nickname.layer.frame.size.width = contentView.layer.frame.size.width / 2
@@ -44,5 +42,12 @@ final class CitiesViewCells: UITableViewCell {
     @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("tableError")
+    }
+}
+
+
+extension UITableViewCell {
+    public class var identifier: String {
+        return "\(self.self)"
     }
 }

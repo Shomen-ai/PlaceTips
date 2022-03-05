@@ -45,7 +45,6 @@
 		D6B8F70027B6D9D500A4866E /* PlaceTipsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B8F6FF27B6D9D500A4866E /* PlaceTipsTests.swift */; };
 		D6B8F70A27B6D9D500A4866E /* PlaceTipsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B8F70927B6D9D500A4866E /* PlaceTipsUITests.swift */; };
 		D6B8F70C27B6D9D500A4866E /* PlaceTipsUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B8F70B27B6D9D500A4866E /* PlaceTipsUITestsLaunchTests.swift */; };
-		D6B8F71F27B7B57E00A4866E /* PlaceTipsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B8F71E27B7B57E00A4866E /* PlaceTipsController.swift */; };
 		D6B8F72127B7B5F100A4866E /* PlaceTipsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B8F72027B7B5F100A4866E /* PlaceTipsView.swift */; };
 		D6B8F72327B7B61000A4866E /* PlaceTipsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B8F72227B7B61000A4866E /* PlaceTipsModel.swift */; };
 		D6B8F72627B812CE00A4866E /* ColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B8F72527B812CE00A4866E /* ColorPalette.swift */; };
@@ -87,7 +86,6 @@
 		D6B8F70527B6D9D500A4866E /* PlaceTipsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PlaceTipsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6B8F70927B6D9D500A4866E /* PlaceTipsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceTipsUITests.swift; sourceTree = "<group>"; };
 		D6B8F70B27B6D9D500A4866E /* PlaceTipsUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceTipsUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		D6B8F71E27B7B57E00A4866E /* PlaceTipsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceTipsController.swift; sourceTree = "<group>"; };
 		D6B8F72027B7B5F100A4866E /* PlaceTipsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceTipsView.swift; sourceTree = "<group>"; };
 		D6B8F72227B7B61000A4866E /* PlaceTipsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceTipsModel.swift; sourceTree = "<group>"; };
 		D6B8F72527B812CE00A4866E /* ColorPalette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPalette.swift; sourceTree = "<group>"; };
@@ -214,7 +212,6 @@
 		D6B8F71A27B7B50200A4866E /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				D6B8F71E27B7B57E00A4866E /* PlaceTipsController.swift */,
 				D6C3087627BEA2540087AAB7 /* MainTabBarController.swift */,
 				D6C3087C27BEA4190087AAB7 /* PlacesView.swift */,
 				D6C3087827BEA3000087AAB7 /* CitiesView.swift */,
@@ -420,7 +417,6 @@
 				D6B8F72327B7B61000A4866E /* PlaceTipsModel.swift in Sources */,
 				D6302A4027CBDD9800377286 /* APIService.swift in Sources */,
 				D6C3087D27BEA4190087AAB7 /* PlacesView.swift in Sources */,
-				D6B8F71F27B7B57E00A4866E /* PlaceTipsController.swift in Sources */,
 				D6B8F6E927B6D9D000A4866E /* AppDelegate.swift in Sources */,
 				D6B8F6EB27B6D9D000A4866E /* SceneDelegate.swift in Sources */,
 				D6B8F72627B812CE00A4866E /* ColorPalette.swift in Sources */,
@@ -599,6 +595,9 @@
 				DEVELOPMENT_TEAM = Z6S52L578H;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PlaceTips/Resources/Info.plist;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -626,6 +625,9 @@
 				DEVELOPMENT_TEAM = Z6S52L578H;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PlaceTips/Resources/Info.plist;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";

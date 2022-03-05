@@ -16,29 +16,28 @@ final class MainTabBarController: UITabBarController {
         // MARK: - Proccessing of some conditions to fix TabBar and NavigationController
         
         if #available(iOS 15.0, *) {
-            let appearance = UITabBarAppearance()
-            appearance.configureWithOpaqueBackground()
-            UITabBar.appearance().standardAppearance = appearance
-            UITabBar.appearance().scrollEdgeAppearance = appearance
+            let tabBarAppearance = UITabBarAppearance()
+            tabBarAppearance.configureWithOpaqueBackground()
+            UITabBar.appearance().standardAppearance = tabBarAppearance
+            UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
+            
+            let navBarappearance = UINavigationBarAppearance()
+            navBarappearance.configureWithOpaqueBackground()
+            UINavigationBar.appearance().standardAppearance = navBarappearance
+            UINavigationBar.appearance().scrollEdgeAppearance = navBarappearance
         }
-        
-        if #available(iOS 15, *) {
-            let appearance = UINavigationBarAppearance()
-            appearance.configureWithOpaqueBackground()
-            UINavigationBar.appearance().standardAppearance = appearance
-            UINavigationBar.appearance().scrollEdgeAppearance = appearance
-        }
+
         
         // MARK: - TabBar items
         
         let citiesView = CitiesView()
-        let someViewController = SomeVC(collectionViewLayout: UICollectionViewFlowLayout())
+        let PlacesView = PlacesView()
 
         viewControllers = [
-            configureNavigationViewController(rootViewController: citiesView,title: "Photos",
-                                              image: UIImage(named: "photos")!),
-            configureNavigationViewController(rootViewController: someViewController,
-                                              title: "Favourites",
+            configureNavigationViewController(rootViewController: citiesView,title: "Города",
+                                              image: UIImage(named: "city")!),
+            configureNavigationViewController(rootViewController: PlacesView,
+                                              title: "Избранное",
                                               image: UIImage(named: "favourites")!)
         ]
     }
