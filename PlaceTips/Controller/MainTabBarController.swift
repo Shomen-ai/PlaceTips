@@ -10,7 +10,6 @@ import UIKit
 final class MainTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .gray
         view.tintColor = .systemBlue
         
         // MARK: - Proccessing of some conditions to fix TabBar and NavigationController
@@ -29,28 +28,31 @@ final class MainTabBarController: UITabBarController {
 
         
         // MARK: - TabBar items
+        let placesView = PlacesView()
+        let profileView = ProfileView()
         
-        let citiesView = CitiesView()
-        let PlacesView = PlacesView()
-
         viewControllers = [
-            configureNavigationViewController(rootViewController: citiesView,title: "Города",
-                                              image: UIImage(named: "city")!),
-            configureNavigationViewController(rootViewController: PlacesView,
-                                              title: "Избранное",
-                                              image: UIImage(named: "favourites")!)
+            configureNavigationViewController(rootViewController: placesView,
+                                              title: "Карта",
+                                              itemIcon: UIImage(systemName: "paperplane.fill")!),
+            configureNavigationViewController(rootViewController: profileView,
+                                              title: "Профиль",
+                                              itemIcon: UIImage(systemName: "person.crop.circle")!)
+            
         ]
+        
+        
     }
     
     // MARK: - Configure NavigationController
 
     private func configureNavigationViewController(rootViewController: UIViewController,
                                                    title: String,
-                                                   image: UIImage) -> UIViewController
+                                                   itemIcon: UIImage) -> UIViewController
     {
         let navigationViewController = UINavigationController(rootViewController: rootViewController)
         navigationViewController.tabBarItem.title = title
-        navigationViewController.tabBarItem.image = image
+        navigationViewController.tabBarItem.image = itemIcon
         return navigationViewController
     }
 }
