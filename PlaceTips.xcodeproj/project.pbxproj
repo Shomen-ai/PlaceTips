@@ -7,15 +7,26 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D6273C14282860D000392BD0 /* ProfileViewCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6273C13282860D000392BD0 /* ProfileViewCells.swift */; };
+		D6302A3D27CBDD2800377286 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D6302A3C27CBDD2800377286 /* GoogleService-Info.plist */; };
+		D6302A4527D3AA6E00377286 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6302A4427D3AA6E00377286 /* CoreLocation.framework */; };
+		D6926341280284AB00B4E112 /* PanModal in Frameworks */ = {isa = PBXBuildFile; productRef = D6926340280284AB00B4E112 /* PanModal */; };
+		D69263432802FE6F00B4E112 /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D69263422802FE6F00B4E112 /* AddViewController.swift */; };
+		D69263452808AD2E00B4E112 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D69263442808AD2E00B4E112 /* ImagePicker.swift */; };
+		D6B390DF27DD90580019856A /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B390DE27DD90580019856A /* ProfileView.swift */; };
 		D6B8F6E927B6D9D000A4866E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B8F6E827B6D9D000A4866E /* AppDelegate.swift */; };
 		D6B8F6EB27B6D9D000A4866E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B8F6EA27B6D9D000A4866E /* SceneDelegate.swift */; };
-		D6B8F6ED27B6D9D000A4866E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B8F6EC27B6D9D000A4866E /* ViewController.swift */; };
-		D6B8F6F027B6D9D000A4866E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D6B8F6EE27B6D9D000A4866E /* Main.storyboard */; };
 		D6B8F6F227B6D9D500A4866E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D6B8F6F127B6D9D500A4866E /* Assets.xcassets */; };
 		D6B8F6F527B6D9D500A4866E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D6B8F6F327B6D9D500A4866E /* LaunchScreen.storyboard */; };
 		D6B8F70027B6D9D500A4866E /* PlaceTipsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B8F6FF27B6D9D500A4866E /* PlaceTipsTests.swift */; };
 		D6B8F70A27B6D9D500A4866E /* PlaceTipsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B8F70927B6D9D500A4866E /* PlaceTipsUITests.swift */; };
 		D6B8F70C27B6D9D500A4866E /* PlaceTipsUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B8F70B27B6D9D500A4866E /* PlaceTipsUITestsLaunchTests.swift */; };
+		D6B8F72327B7B61000A4866E /* PlaceTipsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B8F72227B7B61000A4866E /* PlaceTipsModel.swift */; };
+		D6B8F72627B812CE00A4866E /* ColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B8F72527B812CE00A4866E /* ColorPalette.swift */; };
+		D6C3087727BEA2540087AAB7 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C3087627BEA2540087AAB7 /* MainTabBarController.swift */; };
+		D6C3087D27BEA4190087AAB7 /* PlacesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C3087C27BEA4190087AAB7 /* PlacesView.swift */; };
+		D6D57928280AE5A1000A9993 /* PinInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D57927280AE5A1000A9993 /* PinInfoViewController.swift */; };
+		D6D5792F281632E6000A9993 /* DataBaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D5792E281632E6000A9993 /* DataBaseService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,11 +47,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D6273C13282860D000392BD0 /* ProfileViewCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewCells.swift; sourceTree = "<group>"; };
+		D6302A3C27CBDD2800377286 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		D6302A4427D3AA6E00377286 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		D69263422802FE6F00B4E112 /* AddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
+		D69263442808AD2E00B4E112 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		D6B390DE27DD90580019856A /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		D6B8F6E527B6D9D000A4866E /* PlaceTips.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlaceTips.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6B8F6E827B6D9D000A4866E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D6B8F6EA27B6D9D000A4866E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		D6B8F6EC27B6D9D000A4866E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		D6B8F6EF27B6D9D000A4866E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D6B8F6F127B6D9D500A4866E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D6B8F6F427B6D9D500A4866E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D6B8F6F627B6D9D500A4866E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -49,6 +64,12 @@
 		D6B8F70527B6D9D500A4866E /* PlaceTipsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PlaceTipsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6B8F70927B6D9D500A4866E /* PlaceTipsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceTipsUITests.swift; sourceTree = "<group>"; };
 		D6B8F70B27B6D9D500A4866E /* PlaceTipsUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceTipsUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		D6B8F72227B7B61000A4866E /* PlaceTipsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceTipsModel.swift; sourceTree = "<group>"; };
+		D6B8F72527B812CE00A4866E /* ColorPalette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPalette.swift; sourceTree = "<group>"; };
+		D6C3087627BEA2540087AAB7 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		D6C3087C27BEA4190087AAB7 /* PlacesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesView.swift; sourceTree = "<group>"; };
+		D6D57927280AE5A1000A9993 /* PinInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinInfoViewController.swift; sourceTree = "<group>"; };
+		D6D5792E281632E6000A9993 /* DataBaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +77,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D6926341280284AB00B4E112 /* PanModal in Frameworks */,
+				D6302A4527D3AA6E00377286 /* CoreLocation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -76,6 +99,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D6302A3E27CBDD5D00377286 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				D6D5792E281632E6000A9993 /* DataBaseService.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		D6302A4327D3AA6D00377286 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D6302A4427D3AA6E00377286 /* CoreLocation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		D6B8F6DC27B6D9D000A4866E = {
 			isa = PBXGroup;
 			children = (
@@ -83,6 +122,7 @@
 				D6B8F6FE27B6D9D500A4866E /* PlaceTipsTests */,
 				D6B8F70827B6D9D500A4866E /* PlaceTipsUITests */,
 				D6B8F6E627B6D9D000A4866E /* Products */,
+				D6302A4327D3AA6D00377286 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -101,11 +141,12 @@
 			children = (
 				D6B8F6E827B6D9D000A4866E /* AppDelegate.swift */,
 				D6B8F6EA27B6D9D000A4866E /* SceneDelegate.swift */,
-				D6B8F6EC27B6D9D000A4866E /* ViewController.swift */,
-				D6B8F6EE27B6D9D000A4866E /* Main.storyboard */,
-				D6B8F6F127B6D9D500A4866E /* Assets.xcassets */,
-				D6B8F6F327B6D9D500A4866E /* LaunchScreen.storyboard */,
-				D6B8F6F627B6D9D500A4866E /* Info.plist */,
+				D6B8F71A27B7B50200A4866E /* Controller */,
+				D6302A3E27CBDD5D00377286 /* Service */,
+				D6B8F71B27B7B50D00A4866E /* View */,
+				D6B8F71C27B7B51200A4866E /* Model */,
+				D6B8F71D27B7B54C00A4866E /* Resources */,
+				D6302A3C27CBDD2800377286 /* GoogleService-Info.plist */,
 			);
 			path = PlaceTips;
 			sourceTree = "<group>";
@@ -127,6 +168,46 @@
 			path = PlaceTipsUITests;
 			sourceTree = "<group>";
 		};
+		D6B8F71A27B7B50200A4866E /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				D6C3087627BEA2540087AAB7 /* MainTabBarController.swift */,
+				D6B390DE27DD90580019856A /* ProfileView.swift */,
+				D6273C13282860D000392BD0 /* ProfileViewCells.swift */,
+				D6C3087C27BEA4190087AAB7 /* PlacesView.swift */,
+				D69263422802FE6F00B4E112 /* AddViewController.swift */,
+				D69263442808AD2E00B4E112 /* ImagePicker.swift */,
+				D6D57927280AE5A1000A9993 /* PinInfoViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		D6B8F71B27B7B50D00A4866E /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		D6B8F71C27B7B51200A4866E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D6B8F72227B7B61000A4866E /* PlaceTipsModel.swift */,
+				D6B8F72527B812CE00A4866E /* ColorPalette.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		D6B8F71D27B7B54C00A4866E /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				D6B8F6F327B6D9D500A4866E /* LaunchScreen.storyboard */,
+				D6B8F6F127B6D9D500A4866E /* Assets.xcassets */,
+				D6B8F6F627B6D9D500A4866E /* Info.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -143,6 +224,9 @@
 			dependencies = (
 			);
 			name = PlaceTips;
+			packageProductDependencies = (
+				D6926340280284AB00B4E112 /* PanModal */,
+			);
 			productName = PlaceTips;
 			productReference = D6B8F6E527B6D9D000A4866E /* PlaceTips.app */;
 			productType = "com.apple.product-type.application";
@@ -215,6 +299,9 @@
 				Base,
 			);
 			mainGroup = D6B8F6DC27B6D9D000A4866E;
+			packageReferences = (
+				D692633F280284AB00B4E112 /* XCRemoteSwiftPackageReference "PanModal" */,
+			);
 			productRefGroup = D6B8F6E627B6D9D000A4866E /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -232,8 +319,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				D6B8F6F527B6D9D500A4866E /* LaunchScreen.storyboard in Resources */,
+				D6302A3D27CBDD2800377286 /* GoogleService-Info.plist in Resources */,
 				D6B8F6F227B6D9D500A4866E /* Assets.xcassets in Resources */,
-				D6B8F6F027B6D9D000A4866E /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -258,9 +345,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D6B8F6ED27B6D9D000A4866E /* ViewController.swift in Sources */,
+				D6B390DF27DD90580019856A /* ProfileView.swift in Sources */,
+				D6D5792F281632E6000A9993 /* DataBaseService.swift in Sources */,
+				D69263452808AD2E00B4E112 /* ImagePicker.swift in Sources */,
+				D6D57928280AE5A1000A9993 /* PinInfoViewController.swift in Sources */,
+				D6C3087727BEA2540087AAB7 /* MainTabBarController.swift in Sources */,
+				D6273C14282860D000392BD0 /* ProfileViewCells.swift in Sources */,
+				D6B8F72327B7B61000A4866E /* PlaceTipsModel.swift in Sources */,
+				D69263432802FE6F00B4E112 /* AddViewController.swift in Sources */,
+				D6C3087D27BEA4190087AAB7 /* PlacesView.swift in Sources */,
 				D6B8F6E927B6D9D000A4866E /* AppDelegate.swift in Sources */,
 				D6B8F6EB27B6D9D000A4866E /* SceneDelegate.swift in Sources */,
+				D6B8F72627B812CE00A4866E /* ColorPalette.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -297,14 +393,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		D6B8F6EE27B6D9D000A4866E /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				D6B8F6EF27B6D9D000A4866E /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		D6B8F6F327B6D9D500A4866E /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -441,10 +529,14 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = Z6S52L578H;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = PlaceTips/Info.plist;
+				INFOPLIST_FILE = PlaceTips/Resources/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "This app wants to take pictures.";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "This app wants to use your photos.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -469,10 +561,14 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = Z6S52L578H;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = PlaceTips/Info.plist;
+				INFOPLIST_FILE = PlaceTips/Resources/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "This app wants to take pictures.";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "This app wants to use your photos.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -604,6 +700,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		D692633F280284AB00B4E112 /* XCRemoteSwiftPackageReference "PanModal" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/slackhq/PanModal";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		D6926340280284AB00B4E112 /* PanModal */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D692633F280284AB00B4E112 /* XCRemoteSwiftPackageReference "PanModal" */;
+			productName = PanModal;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = D6B8F6DD27B6D9D000A4866E /* Project object */;
 }
