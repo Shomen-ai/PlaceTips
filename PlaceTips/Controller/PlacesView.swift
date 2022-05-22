@@ -11,14 +11,7 @@ final class PlacesView: UIViewController {
         view.addSubview(addButton)
         setupMapConstraints()
         checkLocationServices()
-        zoomToUserLocation()
-        getCity(location: location)
-        getPlaces(city: cityName)
-        print(places)
-        print(cityName)
-//        setPinUsingMKPointAnnotation(location: CLLocationCoordinate2D(latitude: locationManager.location?.coordinate.latitude ?? 0.0,
-//                                                                      longitude: locationManager.location?.coordinate.longitude ?? 0.0),
-//                                     description: "Here")
+        checkAuthorizationForLocation()
     }
 
     // Название города
@@ -45,10 +38,23 @@ final class PlacesView: UIViewController {
     }
 
     // Название города
-    var cityName: String = ""
+    var cityName: String = "" {
+        didSet {
+            getPlaces(city: cityName)
+        }
+    }
 
 //    // Зарос на получение данных с бд
-    var places: [Places] = []
+    var places: [Places] = [] {
+        didSet {
+            for place in places {
+                let location = CLLocationCoordinate2D(latitude: place.lon, longitude: place.lat)
+                DispatchQueue.main.async {
+                    self.setPinUsingMKPointAnnotation(location: location, description: place.placeName)
+                }
+            }
+        }
+    }
 
     private func setupNavigationBar() {
         navigationController?.setNavigationBarHidden(true, animated: true)
@@ -190,7 +196,12 @@ extension PlacesView: CLLocationManagerDelegate {
         checkAuthorizationForLocation()
     }
 
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {}
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        zoomToUserLocation()
+        if let location = locations.first {
+            getCity(location: location)
+        }
+    }
 }
 
 extension CLLocation {
