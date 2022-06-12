@@ -9,30 +9,49 @@ import Foundation
 import UIKit
 
 final class ProfileViewCells: UITableViewCell {
-    // MARK: Margins for items in TableViewCell
-
-    private enum Margin {
-        static let topMargin: CGFloat = 10
-        static let bottomMargin: CGFloat = -10
-        static let leadingMargin: CGFloat = 25
-        static let trailingMargin: CGFloat = -20
-    }
-
-
+    
     static let reuseIdentifier = "Cell_Cell"
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         selectionStyle = .none
+        contentView.addSubview(numberLabel)
+        contentView.addSubview(placeLabel)
+        setUpNumberLabelConstraints()
+        setUpPlaceLabelConstraints()
     }
-    
-    let label: UILabel = {
+    // номер по порядку
+    let numberLabel: UILabel = {
         let label = UILabel()
+        label.font =  .systemFont(ofSize: 17)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    // название места
+    let placeLabel: UILabel = {
+        let label = UILabel()
+        label.font =  .systemFont(ofSize: 17)
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
-    func configureCell(number: String) {
-        label.text = number
+    func setUpNumberLabelConstraints() {
+        NSLayoutConstraint.activate([
+            numberLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+            numberLabel.centerYAnchor.constraint(equalTo: centerYAnchor)
+        ])
+    }
+    
+    func setUpPlaceLabelConstraints() {
+        NSLayoutConstraint.activate([
+            placeLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
+            placeLabel.centerYAnchor.constraint(equalTo: centerYAnchor)
+        ])
+    }
+    
+    func configureCell(number: String, place: String) {
+        numberLabel.text = number
+        placeLabel.text = place
     }
 
     @available(*, unavailable)

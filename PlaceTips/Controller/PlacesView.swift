@@ -2,39 +2,28 @@ import CoreLocation
 import MapKit
 import PanModal
 import UIKit
+import Firebase
 
 final class PlacesView: UIViewController {
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
         setupNavigationBar()
         view.addSubview(mapView)
         view.addSubview(addButton)
+        view.addSubview(showUser)
+        
         setupMapConstraints()
+        setUpAddButtonConstraints()
+        setUpShowUserButtonConstraints()
+        
         checkLocationServices()
-        zoomToUserLocation()
-        getCity(location: location)
-        getPlaces(city: cityName)
-        print(places)
-        print(cityName)
-//        setPinUsingMKPointAnnotation(location: CLLocationCoordinate2D(latitude: locationManager.location?.coordinate.latitude ?? 0.0,
-//                                                                      longitude: locationManager.location?.coordinate.longitude ?? 0.0),
-//                                     description: "Here")
+        checkAuthorizationForLocation()
     }
-
-    // Название города
-
-    func getPlaces(city: String) {
-        DataBaseService.shared.getData(city: city) { [weak self] result in
-            guard let self = self else { return }
-
-            switch result {
-            case .success(let response):
-                self.places = response
-            case .failure(let error):
-                print(error)
-            }
-        }
-    }
+    
+    // MARK: - Some Data
 
     func getCity(location: CLLocation) {
         location.getCity { [weak self] city, error in
@@ -43,12 +32,32 @@ final class PlacesView: UIViewController {
             self.cityName = String(city)
         }
     }
-
+    
     // Название города
-    var cityName: String = ""
-
-//    // Зарос на получение данных с бд
-    var places: [Places] = []
+    var cityName: String = "" {
+        didSet {
+            DBManager.shared.getPlacesData(cityName: cityName) { places in
+                self.places = places
+                DBManager.shared.places = places
+            }
+            
+        }
+    }
+    
+    
+    var places: [Place] = [] {
+        didSet {
+            for place in places {
+                let location = CLLocationCoordinate2D(latitude: place.lat, longitude: place.lon)
+                DispatchQueue.main.async {
+                    self.setPinUsingMKPointAnnotation(location: location, description: place.placeName, id: place.id)
+                }
+            }
+            DispatchQueue.main.async {
+                self.zoomToUserLocation()
+            }
+        }
+    }
 
     private func setupNavigationBar() {
         navigationController?.setNavigationBarHidden(true, animated: true)
@@ -83,10 +92,11 @@ final class PlacesView: UIViewController {
     }
 
     // подумать как сделать цвет у пинов разный
-    func setPinUsingMKPointAnnotation(location: CLLocationCoordinate2D, description: String) {
+    func setPinUsingMKPointAnnotation(location: CLLocationCoordinate2D, description: String, id: String) {
         let annotation = MKPointAnnotation()
         annotation.coordinate = location
-        annotation.title = description // короче, сюда надо забивать то, как пользователь назвал место
+        annotation.title = description
+        annotation.subtitle = id
         let coordinateRegion = MKCoordinateRegion(center: annotation.coordinate, latitudinalMeters: 800, longitudinalMeters: 800)
         mapView.setRegion(coordinateRegion, animated: true)
         mapView.addAnnotation(annotation)
@@ -110,39 +120,80 @@ final class PlacesView: UIViewController {
     }
 
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        presentPanModal(PinInfoViewController())
+        let vc = PinInfoViewController()
+        for i in 0 ..< places.count {
+            if view.annotation?.subtitle == places[i].id {
+                vc.placeName = places[i].placeName
+                vc.other = places[i].other ?? "-"
+                vc.id = places[i].id
+                vc.cityName = cityName
+                break
+            }
+        }
+        presentPanModal(vc)
     }
 
     // MARK: - Add Button
 
     private let addButton: UIButton = {
         let button = UIButton(type: .custom)
-        button.frame = CGRect(x: UIScreen.main.bounds.width - 60, y: 58, width: 50, height: 50)
-        button.layer.cornerRadius = 0.5 * button.bounds.size.width
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        button.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        button.layer.cornerRadius = 50/2
         button.clipsToBounds = true
         button.backgroundColor = .white
-        button.layer.shadowColor = UIColor.black.cgColor
-        button.layer.shadowOffset = CGSize(width: 10.0, height: 10.0)
-        button.layer.shadowOpacity = 1.0
-        button.layer.shadowRadius = 1.0
-        button.setImage(UIImage(systemName: "plus"), for: .normal) // заменить на плюсик, хз как он называется в поле systemName
+        
+        button.setImage(UIImage(systemName: "plus"), for: .normal)
         button.addTarget(self, action: #selector(addTap), for: .touchUpInside)
         return button
     }()
 
     @objc func addTap(_: UITapGestureRecognizer) {
-        presentPanModal(AddViewController())
+        let vc = AddViewController()
+        vc.cityName = cityName
+        vc.lat = locationManager.location?.coordinate.latitude ?? 0.0
+        vc.lon = locationManager.location?.coordinate.longitude ?? 0.0
+        vc.count = places.count
+        presentPanModal(vc)
     }
+    
+    func setUpAddButtonConstraints() {
+        addButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            addButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10.0),
+            addButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10.0)
+        ])
+    }
+    
+    // MARK: - Show Users Location button
+    
+    private let showUser: UIButton = {
+        let button = UIButton(type: .custom)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        button.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        button.layer.cornerRadius = 50/2
+        button.clipsToBounds = true
+        button.backgroundColor = .white
+        
+        button.setImage(UIImage(systemName: "location.fill"), for: .normal)
+        button.addTarget(self, action: #selector(showUserAction), for: .touchUpInside)
+        return button
+    }()
 
-    // хз как сдлетаь кнопку констрейнтами
-//    func setUpAddButtonconstraints() {
-//        addButton.translatesAutoresizingMaskIntoConstraints = false
-//        NSLayoutConstraint.activate([
-//            addButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10.0),
-//            addButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10.0)
-//        ])
-//    }
-
+    @objc func showUserAction(_: UITapGestureRecognizer) {
+        zoomToUserLocation()
+    }
+    
+    func setUpShowUserButtonConstraints() {
+        showUser.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            showUser.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10.0),
+            showUser.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10.0)
+        ])
+    }
+    
     // MARK: - Loacation Manager
 
     private let locationManager = CLLocationManager()
@@ -190,7 +241,14 @@ extension PlacesView: CLLocationManagerDelegate {
         checkAuthorizationForLocation()
     }
 
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {}
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let location = locations.first {
+            getCity(location: location)
+            DBManager.shared.getUserData(userUID: Auth.auth().currentUser!.uid) { userData in
+                DBManager.shared.userData = userData
+            }
+        }
+    }
 }
 
 extension CLLocation {

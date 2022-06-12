@@ -5,9 +5,39 @@
 //  Created by Дмитрий Шайманов on 17.02.2022.
 //
 
+import Firebase
+import FirebaseAuth
 import UIKit
 
 final class MainTabBarController: UITabBarController {
+    override func viewWillAppear(_ animated: Bool) {
+        viewControllers = [
+            configureNavigationViewController(rootViewController: PlacesView(),
+                                              title: "Карта",
+                                              itemIcon: UIImage(systemName: "map.fill")!),
+            configureNavigationViewController(rootViewController: AuthorizationView(),
+                                              title: "Профиль",
+                                              itemIcon: UIImage(systemName: "person.crop.circle")!)
+        ]
+        Auth.auth().addStateDidChangeListener { _, user in
+            if user == nil {
+                self.viewControllers![0] = self.configureNavigationViewController(rootViewController: PlacesView(),
+                                                                                  title: "Карта",
+                                                                                  itemIcon: UIImage(systemName: "map.fill")!)
+                self.viewControllers![1] = self.configureNavigationViewController(rootViewController: AuthorizationView(),
+                                                                                  title: "Профиль",
+                                                                                  itemIcon: UIImage(systemName: "person.crop.circle")!)
+            } else {
+                self.viewControllers![0] = self.configureNavigationViewController(rootViewController: PlacesView(),
+                                                                                  title: "Карта",
+                                                                                  itemIcon: UIImage(systemName: "map.fill")!)
+                self.viewControllers![1] = self.configureNavigationViewController(rootViewController: ProfileView(),
+                                                                                  title: "Профиль",
+                                                                                  itemIcon: UIImage(systemName: "person.crop.circle")!)
+            }
+        }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.tintColor = .systemBlue
@@ -25,25 +55,18 @@ final class MainTabBarController: UITabBarController {
             UINavigationBar.appearance().standardAppearance = navBarappearance
             UINavigationBar.appearance().scrollEdgeAppearance = navBarappearance
         }
-
-        
-        // MARK: - TabBar items
-        let placesView = PlacesView()
-        let profileView = ProfileView()
-        
-        viewControllers = [
-            configureNavigationViewController(rootViewController: placesView,
-                                              title: "Карта",
-                                              itemIcon: UIImage(systemName: "paperplane.fill")!),
-            configureNavigationViewController(rootViewController: profileView,
-                                              title: "Профиль",
-                                              itemIcon: UIImage(systemName: "person.crop.circle")!)
-            
-        ]
-        
-        
     }
     
+    func configureTabs() {
+        Auth.auth().addStateDidChangeListener { _, user in
+            if user == nil {
+                self.tabBarController?.setViewControllers([PlacesView(), AuthorizationView()], animated: true)
+            } else {
+                self.tabBarController?.setViewControllers([PlacesView(), ProfileView()], animated: true)
+            }
+        }
+    }
+
     // MARK: - Configure NavigationController
 
     private func configureNavigationViewController(rootViewController: UIViewController,

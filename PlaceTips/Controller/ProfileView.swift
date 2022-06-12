@@ -1,16 +1,23 @@
-//
-//  Profile.swift
-//  PlaceTips
-//
-//  Created by Дмитрий Шайманов on 13.03.2022.
-//
-
+import CoreLocation
+import Firebase
 import UIKit
 
 final class ProfileView: UIViewController {
+    
+    override func viewWillAppear(_ animated: Bool) {
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(selectImage))
+        avatarView.addGestureRecognizer(tapGestureRecognizer)
+        avatarView.image = user.image
+        nicknameLabel.text = user.login
+    }
+    
     override func viewDidLoad() {
-        navigationItem.title = "Профиль"
-        navigationController?.navigationBar.prefersLargeTitles = true
+        setUpNavBar()
+        
+        view.backgroundColor = .white
+        
+        avatarView.image = DBManager.shared.userData.image
+        nicknameLabel.text = DBManager.shared.userData.login
         
         view.addSubview(avatarView)
         setupAvatarConstraints()
@@ -21,25 +28,46 @@ final class ProfileView: UIViewController {
         view.addSubview(tableView)
         view.addSubview(favLabel)
         setUpTableViewConstraints()
+    
+        print(DBManager.shared.places)
+        print(DBManager.shared.userData)
     }
+
+    // MARK: - FavFata
+    var user = DBManager.shared.userData
+    
+    var places = DBManager.shared.places
+    
+    // а как данные записать ?
     
     // MARK: - AvatarImage
-    
+
     let avatarView: UIImageView = {
         let view = UIImageView()
-        // view.frame = CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: 30.0, height: 30.0))
-        view.image = resizeImage(image: UIImage(named: "default_pic")!, targetSize: CGSize(width: 150.0, height: 150.0))
+        view.image = UIImage(named: "default_pic")
         
-        view.contentMode = UIView.ContentMode.scaleAspectFit
-        view.frame.size.width = 150.0
-        view.frame.size.height = 150.0
-        view.layer.cornerRadius = view.frame.size.height / 2
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.widthAnchor.constraint(equalToConstant: 150).isActive = true
+        view.heightAnchor.constraint(equalToConstant: 150).isActive = true
+
+        view.layer.cornerRadius = 150 / 2
         view.clipsToBounds = true
         view.layer.borderWidth = 2
         view.layer.borderColor = UIColor.lightGray.cgColor
-        
+        view.isUserInteractionEnabled = true
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(selectImage))
+        tapGestureRecognizer.numberOfTapsRequired = 1
+        view.addGestureRecognizer(tapGestureRecognizer)
         return view
     }()
+    
+    @objc func selectImage(tapGestureRecognizer: UITapGestureRecognizer) {
+        let vc = UIImagePickerController()
+        vc.sourceType = .photoLibrary // подумать как использовать камеру
+        vc.delegate = self
+        vc.allowsEditing = true
+        present(vc, animated: true)
+    }
     
     func setupAvatarConstraints() {
         avatarView.translatesAutoresizingMaskIntoConstraints = false
@@ -54,7 +82,8 @@ final class ProfileView: UIViewController {
     let nicknameLabel: UILabel = {
         let label = UILabel()
         label.text = "Здесь должно быть имя!"
-        label.font = .systemFont(ofSize: 20)
+        label.font = .boldSystemFont(ofSize: 20)
+        
         return label
     }()
     
@@ -67,11 +96,11 @@ final class ProfileView: UIViewController {
     }
 
     // MARK: - FavTable
-    
+
     let favLabel: UILabel = {
         let label = UILabel()
         label.text = "Любимые места"
-        label.font = .systemFont(ofSize: 17)
+        label.font = .systemFont(ofSize: 18)
         return label
     }()
     
@@ -79,8 +108,10 @@ final class ProfileView: UIViewController {
         let table = UITableView()
         table.register(ProfileViewCells.self,
                        forCellReuseIdentifier: ProfileViewCells.reuseIdentifier)
+        table.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         table.delegate = self
         table.dataSource = self
+        table.layer.cornerRadius = 20
         return table
     }()
     
@@ -91,56 +122,87 @@ final class ProfileView: UIViewController {
             favLabel.topAnchor.constraint(equalTo: nicknameLabel.bottomAnchor, constant: 20),
             favLabel.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
             
-            tableView.topAnchor.constraint(equalTo: favLabel.bottomAnchor, constant: 5),
+            tableView.topAnchor.constraint(equalTo: favLabel.bottomAnchor, constant: 15),
             tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             
         ])
     }
+    
+    // MARK: - NavBar setUp
 
-    // MARK: -
-}
-
-func resizeImage(image: UIImage, targetSize: CGSize) -> UIImage? {
-    let size = image.size
-    let widthRatio = targetSize.width / size.width
-    let heightRatio = targetSize.height / size.height
-    // Figure out what our orientation is, and use that to form the rectangle
-    var newSize: CGSize
-    if widthRatio > heightRatio {
-        newSize = CGSize(width: size.width * heightRatio, height: size.height * heightRatio)
-    } else {
-        newSize = CGSize(width: size.width * widthRatio, height: size.height * widthRatio)
+    func setUpNavBar() {
+        navigationItem.title = "Профиль"
+        navigationController?.navigationBar.prefersLargeTitles = true
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "rectangle.portrait.and.arrow.right"), for: .normal)
+        button.addTarget(self, action: #selector(logOut), for: .touchUpInside)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: button)
     }
-    // This is the rect that we've calculated out and this is what is actually used below
-    let rect = CGRect(origin: .zero, size: newSize)
-    // Actually do the resizing to the rect using the ImageContext stuff
-    UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
-    image.draw(in: rect)
-    let newImage = UIGraphicsGetImageFromCurrentImageContext()
-    UIGraphicsEndImageContext()
-    return newImage
+
+    // MARK: - LogOut function
+
+    @objc func logOut(_: UITapGestureRecognizer) {
+        do {
+            try Auth.auth().signOut()
+        } catch {
+            print("Fail to log out")
+        }
+    }
 }
+
+// MARK: - UITableViewDelegate, UITableViewDataSource
 
 extension ProfileView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        3
+        places.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var items = ["1", "2", "3"]
         guard let cell = tableView.dequeueReusableCell(
             withIdentifier: ProfileViewCells.reuseIdentifier,
             for: indexPath
         ) as? ProfileViewCells else {
             return .init()
         }
-        cell.configureCell(number: items[indexPath.row])
+        cell.configureCell(number: String(indexPath.row + 1), place: places[indexPath.row].placeName)
+        cell.backgroundColor = indexPath.row % 2 == 0 ? #colorLiteral(red: 0.955997279, green: 0.955997279, blue: 0.955997279, alpha: 1) : #colorLiteral(red: 0.8425348579, green: 0.8425348579, blue: 0.8425348579, alpha: 1)
         return cell
     }
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tabBarController?.selectedIndex = 0
+        print("It works")
+        // zomm to selected place
     }
 }
+
+// MARK: - UIImagePickerControllerDelegate
+
+extension ProfileView: UIImagePickerControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+        let db = Firestore.firestore()
+        if let image = info[UIImagePickerController.InfoKey(rawValue: "UIImagePickerControllerEditedImage")] as? UIImage {
+            avatarView.image = image
+        }
+        DBManager.shared.uploadImage(id: Auth.auth().currentUser!.uid, photo: avatarView.image!, path: "avatars") { result in
+            switch result {
+            case .success(let url):
+                db.collection("users").document(Auth.auth().currentUser!.uid).setData(["image": url.absoluteString], merge: true)
+            case .failure(let error):
+                print(error)
+            }
+        }
+        picker.dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
+    }
+}
+
+// MARK: - UINavigationControllerDelegate
+
+extension ProfileView: UINavigationControllerDelegate {}
+
